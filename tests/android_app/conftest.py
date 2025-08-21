@@ -1,7 +1,7 @@
 import pytest
 from appium import webdriver
 from selene import browser
-from config import to_driver_options
+from config import config
 from wikipedia_app_demo import utils
 
 
@@ -11,9 +11,9 @@ def context(request):
 
 @pytest.fixture(scope='function', autouse=True)
 def mobile_management(context):
-    options = to_driver_options(context=context)
+    options = config.to_driver_options(context=context)
 
-    browser.config.driver = webdriver.Remote(options.get_capability('remote_url'), options=options)
+    browser.config.driver = webdriver.Remote(config.remote_url, options=options)
     browser.config.timeout = 10.0
 
     yield
